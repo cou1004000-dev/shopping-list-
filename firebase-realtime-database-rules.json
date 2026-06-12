@@ -1,0 +1,22 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+    "users": {
+      "$uid": {
+        ".read": "auth != null && auth.uid === $uid",
+        ".write": "auth != null && auth.uid === $uid && !data.exists()",
+        ".validate": "newData.hasChildren(['e','a','t']) && newData.childrenCount() <= 4 && newData.child('e').isString() && newData.child('e').val().length <= 80 && newData.child('a').isBoolean() && newData.child('a').val() === false && newData.child('t').isNumber() && (!newData.child('n').exists() || (newData.child('n').isString() && newData.child('n').val().length <= 12))"
+      }
+    },
+    "items": {
+      "$uid": {
+        ".read": "auth != null && auth.uid === $uid && root.child('users/'+$uid+'/a').val() === true",
+        "$id": {
+          ".write": "auth != null && auth.uid === $uid && root.child('users/'+$uid+'/a').val() === true",
+          ".validate": "!newData.exists() || (newData.hasChildren(['e','n','c','q','d','t']) && newData.childrenCount() <= 7 && newData.child('e').isString() && newData.child('e').val().length <= 4 && newData.child('n').isString() && newData.child('n').val().length > 0 && newData.child('n').val().length <= 20 && newData.child('c').isString() && newData.child('c').val().matches(/^(food|life|stationery|health|etc)$/) && newData.child('q').isNumber() && newData.child('q').val() >= 1 && newData.child('q').val() <= 99 && newData.child('d').isBoolean() && newData.child('t').isNumber() && (!newData.child('m').exists() || (newData.child('m').isString() && newData.child('m').val().length <= 60)))"
+        }
+      }
+    }
+  }
+}
